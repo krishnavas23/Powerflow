@@ -1,0 +1,34 @@
+# Dependencies & build
+node_modules/
+dist/
+dist-ssr/
+build/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Local / IDE
+.vscode/
+.idea/
+*.local
+.DS_Store
+*.log
+.AddCompLib/
+
+# Databases & ML artifacts
+*.sqlite3
+db.sqlite3
+*.pkl
+*.joblib
+
+# Uploads / misc
+powerflow-backend/uploads/*
+!powerflow-backend/uploads/.gitkeep
+
+# Locks can be committed; keep package-lock for reproducibility

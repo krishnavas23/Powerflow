@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solar Energy Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 250px;
+            padding: 5px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 60%;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #eee;
+        }
+        #error {
+            color: red;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Solar Energy Prediction</h1>
+
+<div>
+    <label for="city">City:</label>
+    <input type="text" id="city" placeholder="Enter city name">
+
+    <label for="capacity">Panel Capacity (kW):</label>
+    <input type="number" id="capacity" step="0.1">
+
+    <label for="efficiency">Panel Efficiency (%):</label>
+    <input type="number" id="efficiency" step="0.01">
+
+    <label for="past_avg">Past Avg Production (kWh):</label>
+    <input type="number" id="past_avg" step="0.1">
+
+    <button onclick="makePrediction()">Predict</button>
+</div>
+
+<div id="error"></div>
+
+<table id="resultTable" style="display:none;">
+    <tr><th>City</th><td id="r_city"></td></tr>
+    <tr><th>Temperature (°C)</th><td id="r_temp"></td></tr>
+    <tr><th>Humidity (%)</th><td id="r_humidity"></td></tr>
+    <tr><th>Cloud Cover (%)</th><td id="r_clouds"></td></tr>
+    <tr><th>Sunlight Hours</th><td id="r_sun_hours"></td></tr>
+    <tr><th>Solar Irradiance (W/m²)</th><td id="r_irradiance"></td></tr>
+    <tr><th>Predicted Energy (kWh)</th><td id="r_prediction"></td></tr>
+</table>
+
+<script>
+async function makePrediction() {
+    document.getElementById("error").innerText = "";
+    const city = document.getElementById("city").value;
+    const capacity = document.getElementById("capacity").value;
+    const efficiency = document.getElementById("efficiency").value;
+    const past_avg = document.getElementById("past_avg").value;
+
+    if (!city || !capacity || !efficiency || !past_avg) {
+        document.getElementById("error").innerText = "Please fill all fields.";
+        return;
+    }
+
+    const payload = {
+        city: city,
+        panel_capacity_kw: parseFloat(capacity),
+        panel_efficiency: parseFloat(efficiency),
+        past_avg_kwh: parseFloat(past_avg)
+    };
+
+    try {
+        const response = await fetch("/api/predict/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            document.getElementById("resultTable").style.display = "table";
+            document.getElementById("r_city").innerText = data.city;
+            document.getElementById("r_temp").innerText = data.temperature;
+            document.getElementById("r_humidity").innerText = data.humidity;
+            document.getElementById("r_clouds").innerText = data.cloud_cover;
+            document.getElementById("r_sun_hours").innerText = data.sunlight_hours;
+            document.getElementById("r_irradiance").innerText = data.solar_irradiance;
+            document.getElementById("r_prediction").innerText = data.predicted_energy_kwh;
+        } else {
+            document.getElementById("error").innerText = data.error || "Prediction failed.";
+        }
+    } catch (err) {
+        document.getElementById("error").innerText = "Server error: " + err;
+    }
+}
+</script>
+
+</body>
+</html>
