@@ -10,7 +10,7 @@
 ![Python](https://img.shields.io/badge/ML-Python-3776AB)
 ![Stripe](https://img.shields.io/badge/Payments-Stripe-635BFF)
 
-A full-stack renewable energy marketplace that enables users to securely buy and sell surplus solar energy using AI-powered forecasting, smart meter validation, digital wallets, and secure online payments.
+A full-stack renewable energy marketplace that enables users to securely buy and sell surplus solar energy using AI-powered forecasting, digital wallets, and secure online payments.
 
 </div>
 
