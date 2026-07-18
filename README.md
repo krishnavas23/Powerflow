@@ -206,7 +206,7 @@ Watch the complete walkthrough of POWERFLOW here:
 👉 **YouTube Demo**
 
 ```
-[https://youtube.com/your-video-link](https://youtu.be/pTH78iPjIZI)
+https://www.youtube.com/watch?v=pTH78iPjIZI
 ```
 
 ---
