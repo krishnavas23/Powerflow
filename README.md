@@ -1,254 +1,459 @@
-# POWERFLOW
+<div align="center">
 
-### UPI for Power
+# ⚡ POWERFLOW
+### *UPI for Power – A Peer-to-Peer Renewable Energy Trading Platform*
 
-**Peer-to-peer renewable energy trading** â€” connect solar producers with homes, companies, NGOs, and hospitals through a digital marketplace for electricity.
+![License](https://img.shields.io/badge/License-MIT-blue)
+![React](https://img.shields.io/badge/Frontend-React-61DAFB)
+![Node.js](https://img.shields.io/badge/Backend-Node.js-339933)
+![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248)
+![Python](https://img.shields.io/badge/ML-Python-3776AB)
+![Stripe](https://img.shields.io/badge/Payments-Stripe-635BFF)
 
-[![Stack](https://img.shields.io/badge/stack-React%20%7C%20Node%20%7C%20Django%20%7C%20MongoDB-0a0e1a.svg)](#tech-stack)
-[![Status](https://img.shields.io/badge/status-hackathon%20ready-success.svg)](#getting-started)
+A full-stack renewable energy marketplace that enables users to securely buy and sell surplus solar energy using AI-powered forecasting, smart meter validation, digital wallets, and secure online payments.
 
----
-
-## About
-
-POWERFLOW is a full-stack P2P energy trading platform. Producers (rooftop solar owners and micro-generators) list surplus kilowatt-hours; buyers purchase or receive donated energy; wallets settle in INR and energy credits; and an AI service forecasts consumption and recommends trades.
-
-Think of it as **UPI for power** â€” simple transfers, transparent pricing, and a live pool of available energy.
-
-| Audience | What they do |
-| --- | --- |
-| **Producers** | Upload surplus energy, set price, get paid |
-| **Buyers** | Browse listings, buy kWh, top up wallet |
-| **Admins** | Verify users, monitor trades, tune platform config |
-| **NGOs / hospitals** | Receive donated energy credits |
+</div>
 
 ---
 
-## Screenshots
+# 📖 Table of Contents
 
-### User dashboard
-![POWERFLOW dashboard](docs/screenshots/dashboard.png)
-
-### Buy energy marketplace
-![Buy energy marketplace](docs/screenshots/buy-energy.png)
-
-### Admin console
-![Admin dashboard](docs/screenshots/admin-dashboard.png)
-
----
-
-## Features
-
-- **Energy marketplace** â€” list, browse, and buy surplus renewable energy
-- **Dual wallet** â€” INR balance + energy credits with Stripe top-ups
-- **AI forecast & recommend** â€” Django/ML service for consumption and trade suggestions
-- **Donate energy** â€” route credits to causes and institutions
-- **KYC / profile verification** â€” unlock higher limits
-- **Admin panel** â€” users, verifications, transactions, reports, platform config
-- **Monorepo layout** â€” frontend, admin, API, and AI services in one repo
+- Overview
+- Problem Statement
+- Features
+- Tech Stack
+- System Architecture
+- Project Preview
+- Demo Video
+- Project Documentation
+- Installation
+- Environment Variables
+- Running the Project
+- Project Structure
+- Future Improvements
+- Contributors
+- License
 
 ---
 
-## Repository structure
+# 🌍 Overview
+
+POWERFLOW is a decentralized peer-to-peer renewable energy trading platform that allows solar energy producers to sell excess electricity directly to consumers without depending entirely on traditional electricity providers.
+
+The platform combines modern web technologies with Machine Learning and IoT concepts to provide secure, intelligent, and transparent energy trading.
+
+---
+
+# ❗ Problem Statement
+
+Traditional electricity grids are highly centralized, making it difficult for individual solar producers to monetize surplus energy efficiently.
+
+POWERFLOW solves this problem by providing:
+
+- ⚡ Direct Producer-to-Consumer Energy Trading
+- 🤖 AI-based Energy Forecasting
+- 📊 Smart Meter Validation
+- 💳 Secure Digital Wallets
+- 🔒 KYC Verification
+- 📈 Admin Analytics Dashboard
+
+---
+
+# ✨ Features
+
+## 👤 User Features
+
+- User Authentication (JWT)
+- Buyer & Producer Roles
+- Digital INR Wallet
+- Energy Credit System
+- Buy & Sell Renewable Energy
+- Energy Donation
+- AI Energy Forecasting
+- Smart Meter Dashboard
+- PDF Bill Generation
+- Email Notifications
+- Stripe Wallet Recharge
+
+---
+
+## 🛠 Admin Features
+
+- Admin Dashboard
+- User Management
+- KYC Verification
+- Transaction Monitoring
+- Analytics Dashboard
+- Platform Configuration
+- Pricing Management
+
+---
+
+## 🤖 AI Module
+
+- Solar Energy Production Prediction
+- Consumption Prediction
+- Buy/Sell Recommendations
+- Weather-based Forecasting using OpenWeather API
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Query
+- React Router
+- Framer Motion
+- Three.js
+- Recharts
+
+---
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JWT Authentication
+- Stripe API
+- Nodemailer
+- PDFKit
+
+---
+
+## Machine Learning
+
+- Python
+- Django
+- Scikit-Learn
+- XGBoost
+- OpenWeather API
+
+---
+
+## Smart Meter Service
+
+- Django REST Framework
+
+---
+
+# 🏗 System Architecture
+
+> Replace the image below with your architecture diagram.
+
+<p align="center">
+
+<img src="screenshots/architecture.png" width="900"/>
+
+</p>
+
+---
+
+# 📸 Project Preview
+
+## Home Page
+
+<img src="screenshots/home.png"/>
+
+---
+
+## Marketplace
+
+<img src="screenshots/marketplace.png"/>
+
+---
+
+## Wallet
+
+<img src="screenshots/wallet.png"/>
+
+---
+
+## Forecast Dashboard
+
+<img src="screenshots/forecast.png"/>
+
+---
+
+## Smart Meter
+
+<img src="screenshots/meter.png"/>
+
+---
+
+## Admin Dashboard
+
+<img src="screenshots/admin-dashboard.png"/>
+
+---
+
+## KYC Verification
+
+<img src="screenshots/kyc.png"/>
+
+---
+
+# 🎥 Demo Video
+
+Watch the complete walkthrough of POWERFLOW here:
+
+👉 **YouTube Demo**
 
 ```
-Powerflow/
-â”œâ”€â”€ powerflow-frontend/   # User web app (React + Vite)        â†’ :8080
-â”œâ”€â”€ admin-frontend/       # Admin console (React + Vite)       â†’ :8081
-â”œâ”€â”€ powerflow-backend/    # REST API (Express + MongoDB)       â†’ :4000
-â”œâ”€â”€ energy1/              # AI / forecast service (Django)     â†’ :8000
-â””â”€â”€ docs/screenshots/     # README images
+https://youtube.com/your-video-link
 ```
 
 ---
 
-## Tech stack
+# 📄 Project Documentation
 
-| Layer | Tech |
-| --- | --- |
-| User & admin UI | React, Vite, TypeScript, Tailwind CSS |
-| API | Node.js, Express, JWT, Stripe |
-| Database | MongoDB (Mongoose) |
-| AI / ML | Django REST, scikit-learn, XGBoost, pandas |
-| Payments | Stripe |
+Complete project report explaining:
+
+- Motivation
+- Objectives
+- Research
+- Working
+- Architecture
+- Modules
+- APIs
+- Database Design
+- Future Scope
+
+📄 **PDF**
+
+```
+docs/POWERFLOW_Project_Report.pdf
+```
+
+or
+
+```
+https://drive.google.com/.....
+```
 
 ---
 
-## Prerequisites
+# 🚀 Installation
 
-Install these before running locally:
-
-- **Node.js** 18+ and npm
-- **Python** 3.11+ and pip
-- **MongoDB** running locally (or a MongoDB Atlas URI)
-- **Git**
-
-Optional: a Stripe test key pair and an OpenWeatherMap API key for live weather-aware forecasts.
-
----
-
-## Getting started
-
-### 1. Clone the repo
+## 1. Clone Repository
 
 ```bash
-git clone https://github.com/krishnavas23/Powerflow.git
-cd Powerflow
+git clone https://github.com/yourusername/POWERFLOW.git
+
+cd POWERFLOW
 ```
 
-### 2. Backend API (`powerflow-backend`)
+---
+
+## 2. Backend
 
 ```bash
 cd powerflow-backend
-cp .env.example .env
-# Edit .env â€” set MONGO_URI, JWT_SECRET, ADMIN_KEY, Stripe keys if needed
+
 npm install
+
 npm run dev
 ```
 
-API listens on **http://localhost:4000**.
+Runs on
 
-### 3. AI service (`energy1`)
-
-```bash
-cd energy1
-cp .env.example .env
-# Edit .env â€” set DJANGO_SECRET_KEY (and OPENWEATHER_API_KEY if you have one)
-python -m venv .venv
-
-# Windows
-.venv\Scripts\activate
-
-# macOS / Linux
-source .venv/bin/activate
-
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver 8000
+```
+http://localhost:4000
 ```
 
-AI service listens on **http://127.0.0.1:8000**.
+---
 
-### 4. User frontend (`powerflow-frontend`)
+## 3. User Frontend
 
 ```bash
 cd powerflow-frontend
-cp .env.example .env
-# Defaults point at local backend (:4000) and AI (:8000)
-npm install
-npm run dev
+
+pnpm install
+
+pnpm dev
 ```
 
-Open **http://localhost:8080**.
+Runs on
 
-### 5. Admin frontend (`admin-frontend`)
+```
+http://localhost:8080
+```
+
+---
+
+## 4. Admin Frontend
 
 ```bash
 cd admin-frontend
-cp .env.example .env
-npm install
-npm run dev
+
+pnpm install
+
+pnpm dev
 ```
 
-Open **http://localhost:8081**.
+Runs on
 
----
-
-## Environment variables
-
-Copy each `.env.example` to `.env`. Secrets stay local â€” they are gitignored.
-
-### `powerflow-backend/.env`
-
-| Variable | Purpose |
-| --- | --- |
-| `PORT` | API port (default `4000`) |
-| `MONGO_URI` | MongoDB connection string |
-| `JWT_SECRET` | Auth token signing secret |
-| `ADMIN_KEY` | Key required for admin registration |
-| `STRIPE_SECRET_KEY` / `STRIPE_WEBHOOK_SECRET` | Payments |
-| `FRONTEND_URL` | CORS / redirects (default `http://localhost:8080`) |
-
-### `powerflow-frontend/.env`
-
-| Variable | Purpose |
-| --- | --- |
-| `VITE_BACKEND_BASE_URL` | API base URL |
-| `VITE_AI_BASE_URL` | Django AI service URL |
-| `VITE_ADMIN_URL` | Admin app URL |
-| `VITE_STRIPE_PUBLISHABLE_KEY` | Stripe publishable key |
-
-### `admin-frontend/.env`
-
-| Variable | Purpose |
-| --- | --- |
-| `VITE_BACKEND_BASE_URL` | API base URL |
-
-### `energy1/.env`
-
-| Variable | Purpose |
-| --- | --- |
-| `DJANGO_SECRET_KEY` | Django secret |
-| `DEBUG` / `ALLOWED_HOSTS` | Dev settings |
-| `OPENWEATHER_API_KEY` | Optional weather data |
-
----
-
-## Quick start checklist
-
-1. Start **MongoDB**
-2. Start **backend** on `:4000`
-3. Start **energy1** on `:8000`
-4. Start **user frontend** on `:8080`
-5. Start **admin frontend** on `:8081` (optional)
-
-```text
-MongoDB  â†’  Backend :4000  â†’  Frontend :8080
-                â†‘
-           energy1 :8000
-                â†‘
-           Admin :8081
+```
+http://localhost:5173
 ```
 
 ---
 
-## Typical user flows
+## 5. Machine Learning Service
 
-1. **Register / log in** on the user app  
-2. **Verify profile** (KYC) for higher limits  
-3. **Add funds** to the INR wallet (Stripe)  
-4. **Buy energy** from marketplace listings â€” or **upload** surplus as a producer  
-5. Check **AI forecast** for consumption / recommendations  
-6. **Donate** energy credits to supported causes  
+```bash
+cd energy1
 
-Admins use the admin console to verify accounts, review transactions, and adjust platform settings.
+python -m venv venv
 
----
+pip install -r requirements.txt
 
-## Scripts reference
+python manage.py runserver 8000
+```
 
-| Package | Dev | Production |
-| --- | --- | --- |
-| `powerflow-backend` | `npm run dev` | `npm start` |
-| `powerflow-frontend` | `npm run dev` | `npm run build` â†’ `npm start` |
-| `admin-frontend` | `npm run dev` | `npm run build` â†’ `npm start` |
-| `energy1` | `python manage.py runserver 8000` | Use a WSGI/ASGI server (e.g. gunicorn) |
+Runs on
+
+```
+http://localhost:8000
+```
 
 ---
 
-## Contributing
+## 6. Smart Meter Service
 
-Issues and pull requests are welcome. For substantial changes, open an issue first so we can align on scope.
+```bash
+cd meterr
 
-1. Fork the repo  
-2. Create a feature branch (`git checkout -b feature/your-idea`)  
-3. Commit and push  
-4. Open a pull request  
+python -m venv venv
+
+pip install -r requirements.txt
+
+python manage.py runserver 8001
+```
+
+Runs on
+
+```
+http://localhost:8001
+```
 
 ---
 
-<p align="center">
-  <strong>POWERFLOW</strong> Â· UPI for Power<br/>
-  Built for peer-to-peer renewable energy trading
-</p>
+# 🔑 Environment Variables
 
+Create a `.env` file inside the backend.
+
+Example:
+
+```env
+PORT=
+MONGO_URI=
+
+JWT_SECRET=
+
+ADMIN_KEY=
+
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+
+EMAIL_USER=
+EMAIL_PASS=
+
+FRONTEND_URL=
+```
+
+Create `.env` for both frontends.
+
+```env
+VITE_BACKEND_BASE_URL=
+REACT_STRIPE_PUBLISHABLE_KEY=
+```
+
+---
+
+# ▶ Running the Complete Project
+
+Start services in the following order:
+
+1. MongoDB
+2. Backend
+3. Smart Meter Service
+4. ML Service
+5. User Frontend
+6. Admin Frontend
+
+---
+
+# 📂 Project Structure
+
+```
+POWERFLOW
+│
+├── powerflow-backend/
+│
+├── powerflow-frontend/
+│
+├── admin-frontend/
+│
+├── energy1/
+│
+├── meterr/
+│
+├── docs/
+│
+└── README.md
+```
+
+---
+
+# ⚠ Important Notes
+
+- Configure all environment variables before running.
+- Use your own MongoDB Atlas database.
+- Use Stripe Test Keys during development.
+- Add your own Gmail App Password for email services.
+- Obtain an OpenWeather API Key for AI predictions.
+- Ensure all five services are running simultaneously.
+
+---
+
+# 🚀 Future Improvements
+
+- Blockchain-based energy transactions
+- Mobile Application
+- Live IoT Smart Meter Integration
+- Real-time Notifications
+- Docker & Kubernetes Deployment
+- CI/CD Pipeline
+- Multi-language Support
+
+---
+
+# 👨‍💻 Contributors
+
+**Krishna Vashisht**
+
+Feel free to contribute by opening Issues or Pull Requests.
+
+---
+
+# ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+It helps others discover the project!
+
+---
+
+<div align="center">
+
+### ⚡ POWERFLOW
+### *Empowering Renewable Energy Trading Through Technology.*
+
+</div>
