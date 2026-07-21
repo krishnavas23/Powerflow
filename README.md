@@ -156,11 +156,11 @@ POWERFLOW solves this problem by providing:
 
 <img width="1595" height="986" alt="image" src="https://github.com/user-attachments/assets/da32fef4-de21-47ac-9c15-23731d0ef56f" />
 
+---
 
 ## Home Page
 
 <img width="1131" height="877" alt="Screenshot 2026-07-18 164028" src="https://github.com/user-attachments/assets/9d2f639f-361f-47f9-aa17-bd21f4c74bab" />
-
 
 ---
 
@@ -198,7 +198,6 @@ POWERFLOW solves this problem by providing:
 
 <img width="1642" height="741" alt="Screenshot 2026-07-18 164337" src="https://github.com/user-attachments/assets/1c4207ec-37e6-4442-80e7-d94b88ceb5d4" />
 
-
 ---
 
 ## Profile Section
@@ -211,15 +210,11 @@ POWERFLOW solves this problem by providing:
 
 <img width="1390" height="591" alt="Screenshot 2026-07-18 164427" src="https://github.com/user-attachments/assets/0d6f89f0-f410-473a-a112-ce6ee7925b9c" />
 
-
 ---
-
-
 
 ## Admin Dashboard
 
 <img width="1885" height="862" alt="Screenshot 2026-07-18 170245" src="https://github.com/user-attachments/assets/dc02fecf-46f0-4702-bd23-424c880fd22b" />
-
 
 ---
 
@@ -227,12 +222,11 @@ POWERFLOW solves this problem by providing:
 
 <img width="1895" height="887" alt="Screenshot 2026-07-18 170341" src="https://github.com/user-attachments/assets/72a92434-4125-4632-af38-a2980315c1d8" />
 
-
+---
 
 ## KYC Verification
 
 <img width="1901" height="870" alt="Screenshot 2026-07-18 170515" src="https://github.com/user-attachments/assets/d1797880-e643-47f9-a4c9-776fca5ba57a" />
-
 
 ---
 
@@ -241,37 +235,25 @@ POWERFLOW solves this problem by providing:
 Watch the complete walkthrough of POWERFLOW here:
 
 👉 **YouTube Demo**
-
 ```
 https://www.youtube.com/watch?v=pTH78iPjIZI
 ```
 
----
-
-# 📄 Project Documentation
-
-Complete project report explaining:
-
-- Motivation
-- Objectives
-- Research
-- Working
-- Architecture
-- Modules
-- APIs
-- Database Design
-- Future Scope
-
-
----
-
 # 🚀 Installation
+
+## Prerequisites
+
+- Node.js 18+
+- pnpm
+- Python 3.10+
+- MongoDB Atlas (or local MongoDB)
+
+---
 
 ## 1. Clone Repository
 
 ```bash
 git clone https://github.com/yourusername/POWERFLOW.git
-
 cd POWERFLOW
 ```
 
@@ -287,7 +269,7 @@ npm install
 npm run dev
 ```
 
-Runs on
+Runs on:
 
 ```
 http://localhost:4000
@@ -305,7 +287,7 @@ pnpm install
 pnpm dev
 ```
 
-Runs on
+Runs on:
 
 ```
 http://localhost:8080
@@ -323,7 +305,7 @@ pnpm install
 pnpm dev
 ```
 
-Runs on
+Runs on:
 
 ```
 http://localhost:5173
@@ -331,45 +313,31 @@ http://localhost:5173
 
 ---
 
-## 5. Machine Learning Service
+## 5. AI Forecasting Service
 
 ```bash
 cd energy1
 
-python -m venv venv
+python -m venv .venv
+
+# Windows
+.venv\Scripts\activate
+
+# macOS/Linux
+source .venv/bin/activate
 
 pip install -r requirements.txt
+
+python manage.py migrate
 
 python manage.py runserver 8000
 ```
 
-Runs on
+Runs on:
 
 ```
 http://localhost:8000
 ```
-
----
-
-## 6. Smart Meter Service
-
-```bash
-cd meterr
-
-python -m venv venv
-
-pip install -r requirements.txt
-
-python manage.py runserver 8001
-```
-
-Runs on
-
-```
-http://localhost:8001
-```
-
----
 
 # 🔑 Environment Variables
 
@@ -409,10 +377,9 @@ Start services in the following order:
 
 1. MongoDB
 2. Backend
-3. Smart Meter Service
-4. ML Service
-5. User Frontend
-6. Admin Frontend
+3. ML Service
+4. User Frontend
+5. Admin Frontend
 
 ---
 
@@ -429,7 +396,6 @@ POWERFLOW
 │
 ├── energy1/
 │
-├── meterr/
 │
 ├── docs/
 │
@@ -461,13 +427,6 @@ POWERFLOW
 
 ---
 
-# 👨‍💻 Contributors
-
-**Krishna Vashisht**
-
-Feel free to contribute by opening Issues or Pull Requests.
-
----
 
 # ⭐ Support
 
