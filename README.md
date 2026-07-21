@@ -52,7 +52,7 @@ POWERFLOW solves this problem by providing:
 
 - ⚡ Direct Producer-to-Consumer Energy Trading
 - 🤖 AI-based Energy Forecasting
-- 📊 Smart Meter Validation
+- 📧 Email Notifications & Automated PDF Receipts – Automatic transaction confirmations with downloadable PDF receipts.
 - 💳 Secure Digital Wallets
 - 🔒 KYC Verification
 - 📈 Admin Analytics Dashboard
@@ -70,7 +70,6 @@ POWERFLOW solves this problem by providing:
 - Buy & Sell Renewable Energy
 - Energy Donation
 - AI Energy Forecasting
-- Smart Meter Dashboard
 - PDF Bill Generation
 - Email Notifications
 - Stripe Wallet Recharge
@@ -137,19 +136,14 @@ POWERFLOW solves this problem by providing:
 
 ---
 
-## Smart Meter Service
-
-- Django REST Framework
-
----
-
 # 🏗 System Architecture
 
 > Replace the image below with your architecture diagram.
 
 <p align="center">
 
-<img src="screenshots/architecture.png" width="900"/>
+![Uploading image.png…]()
+
 
 </p>
 
@@ -157,45 +151,87 @@ POWERFLOW solves this problem by providing:
 
 # 📸 Project Preview
 
+## Login Page
+
+<img width="1595" height="986" alt="image" src="https://github.com/user-attachments/assets/da32fef4-de21-47ac-9c15-23731d0ef56f" />
+
+
 ## Home Page
 
-<img src="screenshots/home.png"/>
+<img width="1131" height="877" alt="Screenshot 2026-07-18 164028" src="https://github.com/user-attachments/assets/9d2f639f-361f-47f9-aa17-bd21f4c74bab" />
+
+
+---
+
+## Add Funds
+
+<img width="1567" height="752" alt="Screenshot 2026-07-18 164040" src="https://github.com/user-attachments/assets/efbded34-9958-4a32-918e-f440db5ce479" />
 
 ---
 
 ## Marketplace
 
-<img src="screenshots/marketplace.png"/>
+<img width="1545" height="881" alt="Screenshot 2026-07-18 171350" src="https://github.com/user-attachments/assets/1f16f3ca-22d8-4c33-9ede-fe9f8cc48c81" />
 
 ---
 
 ## Wallet
 
-<img src="screenshots/wallet.png"/>
+<img width="1688" height="645" alt="Screenshot 2026-07-18 164103" src="https://github.com/user-attachments/assets/5df22f73-ac77-483c-b652-bd0e354f88a7" />
+
+---
+
+## Upload energy
+
+<img width="1611" height="661" alt="Screenshot 2026-07-18 164125" src="https://github.com/user-attachments/assets/136c9c36-b1ce-47af-a5f7-6dbcadba9408" />
 
 ---
 
 ## Forecast Dashboard
 
-<img src="screenshots/forecast.png"/>
+<img width="927" height="896" alt="Screenshot 2026-07-18 164213" src="https://github.com/user-attachments/assets/a922a20c-1532-4e22-97ff-0dacfb809a3f" />
 
 ---
 
-## Smart Meter
+## Donate Energy
 
-<img src="screenshots/meter.png"/>
+<img width="1642" height="741" alt="Screenshot 2026-07-18 164337" src="https://github.com/user-attachments/assets/1c4207ec-37e6-4442-80e7-d94b88ceb5d4" />
+
 
 ---
+
+## Profile Section
+
+<img width="1522" height="637" alt="Screenshot 2026-07-18 164400" src="https://github.com/user-attachments/assets/19a5719c-755c-4d07-8224-ccfc809770ca" />
+
+---
+
+## Help & Support Section
+
+<img width="1390" height="591" alt="Screenshot 2026-07-18 164427" src="https://github.com/user-attachments/assets/0d6f89f0-f410-473a-a112-ce6ee7925b9c" />
+
+
+---
+
+
 
 ## Admin Dashboard
 
-<img src="screenshots/admin-dashboard.png"/>
+<img width="1885" height="862" alt="Screenshot 2026-07-18 170245" src="https://github.com/user-attachments/assets/dc02fecf-46f0-4702-bd23-424c880fd22b" />
+
 
 ---
 
+## Transaction Management
+
+<img width="1895" height="887" alt="Screenshot 2026-07-18 170341" src="https://github.com/user-attachments/assets/72a92434-4125-4632-af38-a2980315c1d8" />
+
+
+
 ## KYC Verification
 
-<img src="screenshots/kyc.png"/>
+<img width="1901" height="870" alt="Screenshot 2026-07-18 170515" src="https://github.com/user-attachments/assets/d1797880-e643-47f9-a4c9-776fca5ba57a" />
+
 
 ---
 
@@ -225,17 +261,6 @@ Complete project report explaining:
 - Database Design
 - Future Scope
 
-📄 **PDF**
-
-```
-docs/POWERFLOW_Project_Report.pdf
-```
-
-or
-
-```
-https://drive.google.com/.....
-```
 
 ---
 
