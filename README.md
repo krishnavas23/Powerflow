@@ -142,7 +142,8 @@ POWERFLOW solves this problem by providing:
 
 <p align="center">
 
-![Uploading image.png…]()
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/b1e98fae-d48e-4780-89da-584ebe81d515" />
+
 
 
 </p>
