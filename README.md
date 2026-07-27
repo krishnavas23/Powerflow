@@ -138,8 +138,6 @@ POWERFLOW solves this problem by providing:
 
 # 🏗 System Architecture
 
-> Replace the image below with your architecture diagram.
-
 <p align="center">
 
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/b1e98fae-d48e-4780-89da-584ebe81d515" />
