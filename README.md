@@ -241,19 +241,19 @@ https://docs.google.com/presentation/d/1aICHWAa9ubrZVwWngMhZ9iOu4mRIuJ-9/edit?us
 
 ## Admin Dashboard
 
-<img width="1885" height="862" alt="Screenshot 2026-07-18 170245" src="https://github.com/user-attachments/assets/dc02fecf-46f0-4702-bd23-424c880fd22b" />
+<img width="1896" height="864" alt="Screenshot 2026-08-01 140019" src="https://github.com/user-attachments/assets/c06ccc61-29d5-4ece-8c2e-6c93253dabef" />
 
 ---
 
 ## Transaction Management
 
-<img width="1895" height="887" alt="Screenshot 2026-07-18 170341" src="https://github.com/user-attachments/assets/72a92434-4125-4632-af38-a2980315c1d8" />
+<img width="1896" height="864" alt="Screenshot 2026-08-01 140019" src="https://github.com/user-attachments/assets/0235c14e-0b1e-454e-9a42-535989420e26" />
 
 ---
 
 ## KYC Verification
 
-<img width="1901" height="870" alt="Screenshot 2026-07-18 170515" src="https://github.com/user-attachments/assets/d1797880-e643-47f9-a4c9-776fca5ba57a" />
+<img width="1891" height="863" alt="Screenshot 2026-08-01 140054" src="https://github.com/user-attachments/assets/609b1ad2-0e07-478c-a9ba-cb4b07350cd9" />
 
 ---
 
