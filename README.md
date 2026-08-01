@@ -257,6 +257,18 @@ https://docs.google.com/presentation/d/1aICHWAa9ubrZVwWngMhZ9iOu4mRIuJ-9/edit?us
 
 ---
 
+## EDA & KPI Reporting
+
+<img width="1906" height="854" alt="Screenshot 2026-08-01 140141" src="https://github.com/user-attachments/assets/5f5380dc-0f32-482b-afef-422747f4cdc3" />
+
+---
+
+## Power BI
+
+<img width="1883" height="864" alt="Screenshot 2026-08-01 140156" src="https://github.com/user-attachments/assets/77728389-2d84-4ad6-9de3-33db96e4aff1" />
+
+---
+
 # 🎥 Demo Video
 
 Watch the complete walkthrough of POWERFLOW here:
