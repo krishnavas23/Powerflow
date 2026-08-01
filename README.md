@@ -9,8 +9,9 @@
 ![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248)
 ![Python](https://img.shields.io/badge/ML-Python-3776AB)
 ![Stripe](https://img.shields.io/badge/Payments-Stripe-635BFF)
+![Power BI](https://img.shields.io/badge/Analytics-Power%20BI-F2C811)
 
-A full-stack renewable energy marketplace that enables users to securely buy and sell surplus solar energy using AI-powered forecasting, digital wallets, and secure online payments.
+A full-stack renewable energy marketplace that enables users to securely buy and sell surplus solar energy using AI-powered forecasting, digital wallets, secure online payments, and BI-ready admin analytics.
 
 </div>
 
@@ -25,13 +26,14 @@ A full-stack renewable energy marketplace that enables users to securely buy and
 - System Architecture
 - Project Preview
 - Demo Video
-- Project Documentation
+- PPT
 - Installation
 - Environment Variables
+- Power BI Integration
 - Running the Project
 - Project Structure
 - Future Improvements
-- Contributors
+- Support
 - License
 
 ---
@@ -40,7 +42,7 @@ A full-stack renewable energy marketplace that enables users to securely buy and
 
 POWERFLOW is a decentralized peer-to-peer renewable energy trading platform that allows solar energy producers to sell excess electricity directly to consumers without depending entirely on traditional electricity providers.
 
-The platform combines modern web technologies with Machine Learning and IoT concepts to provide secure, intelligent, and transparent energy trading.
+The platform combines modern web technologies with Machine Learning and IoT concepts to provide secure, intelligent, and transparent energy trading — plus admin dashboards, exploratory KPI reporting, and Microsoft Power BI–ready datasets for advanced analytics.
 
 ---
 
@@ -52,10 +54,12 @@ POWERFLOW solves this problem by providing:
 
 - ⚡ Direct Producer-to-Consumer Energy Trading
 - 🤖 AI-based Energy Forecasting
-- 📧 Email Notifications & Automated PDF Receipts – Automatic transaction confirmations with downloadable PDF receipts.
+- 📧 Email Notifications & Automated PDF Receipts – Automatic transaction confirmations with downloadable PDF receipts
 - 💳 Secure Digital Wallets
 - 🔒 KYC Verification
-- 📈 Admin Analytics Dashboard
+- 📈 Admin Analytics Dashboard (Recharts)
+- 📊 EDA & KPI Reporting with actionable insights
+- 🧩 Microsoft Power BI integration via BI-ready REST/CSV APIs
 
 ---
 
@@ -70,21 +74,33 @@ POWERFLOW solves this problem by providing:
 - Buy & Sell Renewable Energy
 - Energy Donation
 - AI Energy Forecasting
-- PDF Bill Generation
+- PDF Bill / Receipt Generation
 - Email Notifications
 - Stripe Wallet Recharge
+- Wallet transaction export (Excel-compatible CSV)
 
 ---
 
 ## 🛠 Admin Features
 
-- Admin Dashboard
+- Admin Dashboard (live KPI cards + revenue/energy charts)
 - User Management
-- KYC Verification
+- KYC Verification (approve/reject with email notifications)
 - Transaction Monitoring
-- Analytics Dashboard
+- **EDA & KPI Reporting** – period-over-period KPIs, trend charts, verification/txn breakdowns, actionable insights, Excel/CSV export, and email report
+- **Power BI Hub** – live KPI preview, dataset catalog, CSV downloads, and Power Query setup for Desktop
 - Platform Configuration
 - Pricing Management
+
+---
+
+## 📊 Analytics & Power BI
+
+- In-app analytics with **Recharts** (Dashboard + EDA & KPI Reporting)
+- BI-ready REST/CSV datasets under `/api/admin/powerbi/*`
+- Service-key auth for Power BI Desktop / scheduled refresh (`X-PowerBI-Key`)
+- Datasets include KPIs, transactions, daily/monthly revenue, energy by source, hourly activity, meter daily, and verification summary
+- Optional embed of a published Power BI report via `VITE_POWERBI_EMBED_URL`
 
 ---
 
@@ -123,6 +139,15 @@ POWERFLOW solves this problem by providing:
 - Stripe API
 - Nodemailer
 - PDFKit
+- Power BI–ready analytics APIs (REST + CSV)
+
+---
+
+## Analytics
+
+- Recharts (in-app dashboards)
+- Microsoft Power BI Desktop (external BI reports)
+- MongoDB aggregations for live KPIs and insights
 
 ---
 
@@ -147,8 +172,6 @@ https://docs.google.com/presentation/d/1aICHWAa9ubrZVwWngMhZ9iOu4mRIuJ-9/edit?us
 <p align="center">
 
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/b1e98fae-d48e-4780-89da-584ebe81d515" />
-
-
 
 </p>
 
@@ -238,10 +261,10 @@ https://docs.google.com/presentation/d/1aICHWAa9ubrZVwWngMhZ9iOu4mRIuJ-9/edit?us
 
 Watch the complete walkthrough of POWERFLOW here:
 
-👉 **YouTube Demo**
-```
+👉 **YouTube Demo**  
 https://www.youtube.com/watch?v=pTH78iPjIZI
-```
+
+---
 
 # 🚀 Installation
 
@@ -251,14 +274,15 @@ https://www.youtube.com/watch?v=pTH78iPjIZI
 - pnpm
 - Python 3.10+
 - MongoDB Atlas (or local MongoDB)
+- (Optional) Microsoft Power BI Desktop for external BI reports
 
 ---
 
 ## 1. Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/POWERFLOW.git
-cd POWERFLOW
+git clone https://github.com/krishnavas23/Powerflow.git
+cd Powerflow
 ```
 
 ---
@@ -343,18 +367,20 @@ Runs on:
 http://localhost:8000
 ```
 
+---
+
 # 🔑 Environment Variables
 
-Create a `.env` file inside the backend.
+Create a `.env` file inside `powerflow-backend`.
 
 Example:
 
 ```env
-PORT=
+PORT=4000
 MONGO_URI=
 
 JWT_SECRET=
-
+JWT_EXPIRES_IN=7d
 ADMIN_KEY=
 
 STRIPE_SECRET_KEY=
@@ -363,15 +389,68 @@ STRIPE_WEBHOOK_SECRET=
 EMAIL_USER=
 EMAIL_PASS=
 
-FRONTEND_URL=
+FRONTEND_URL=http://localhost:8080
+
+# Power BI Desktop / scheduled refresh (send as header: X-PowerBI-Key)
+POWERBI_API_KEY=
 ```
 
-Create `.env` for both frontends.
+Create `.env` for the admin frontend (`admin-frontend`):
 
 ```env
-VITE_BACKEND_BASE_URL=
+VITE_BACKEND_BASE_URL=http://localhost:4000
+
+# Optional: embed a published Power BI Service report in Admin → Power BI
+VITE_POWERBI_EMBED_URL=
+```
+
+Create `.env` for the user frontend (`powerflow-frontend`):
+
+```env
+VITE_BACKEND_BASE_URL=http://localhost:4000
 REACT_STRIPE_PUBLISHABLE_KEY=
 ```
+
+---
+
+# 📊 Power BI Integration
+
+POWERFLOW exposes BI-ready datasets so Microsoft Power BI Desktop can connect without rewriting backend analytics.
+
+1. Start the backend with `POWERBI_API_KEY` set.
+2. Open **Admin → Power BI** for:
+   - Connection status + live KPI preview
+   - Dataset URLs and CSV downloads
+   - Sample Power Query / auth guidance
+3. In Power BI Desktop, use **Get Data → Web** (or Power Query) against:
+
+```
+http://localhost:4000/api/admin/powerbi/kpis
+```
+
+Add HTTP header:
+
+```
+X-PowerBI-Key: <your POWERBI_API_KEY>
+```
+
+Other useful endpoints (same auth):
+
+| Dataset | Endpoint |
+|--------|----------|
+| Catalog | `/api/admin/powerbi/` |
+| KPIs | `/api/admin/powerbi/kpis` |
+| Transactions | `/api/admin/powerbi/transactions` |
+| Revenue (daily) | `/api/admin/powerbi/revenue-daily` |
+| Revenue (monthly) | `/api/admin/powerbi/revenue-monthly` |
+| Energy by source | `/api/admin/powerbi/energy-by-source` |
+| Hourly activity | `/api/admin/powerbi/user-activity-hourly` |
+| Meter daily | `/api/admin/powerbi/meter-daily` |
+| Verification summary | `/api/admin/powerbi/verification-summary` |
+
+Append `?format=csv` where supported for Excel / Power BI CSV import.
+
+> **Note:** In-app Dashboard / EDA charts use **Recharts**. Power BI Desktop reports use **Microsoft Power BI visuals**. Both read live MongoDB aggregations from the backend.
 
 ---
 
@@ -390,19 +469,13 @@ Start services in the following order:
 # 📂 Project Structure
 
 ```
-POWERFLOW
+Powerflow
 │
-├── powerflow-backend/
-│
-├── powerflow-frontend/
-│
-├── admin-frontend/
-│
-├── energy1/
-│
-│
-├── docs/
-│
+├── powerflow-backend/     # Express API, Stripe, KYC, analytics, Power BI datasets
+├── powerflow-frontend/    # User marketplace, wallet, forecasting UI
+├── admin-frontend/        # Admin dashboard, EDA/KPI, Power BI hub, KYC
+├── energy1/               # Django + ML forecasting service
+├── docs/                  # Extra documentation (if present)
 └── README.md
 ```
 
@@ -415,12 +488,17 @@ POWERFLOW
 - Use Stripe Test Keys during development.
 - Add your own Gmail App Password for email services.
 - Obtain an OpenWeather API Key for AI predictions.
-- Ensure all five services are running simultaneously.
+- Set `POWERBI_API_KEY` before connecting Power BI Desktop.
+- Never commit real `.env` files, API keys, or `.pbix` practice assets.
+- Ensure all five services are running simultaneously for a full demo.
+- “UPI for Power” is branding; wallet recharge uses **Stripe Checkout** (cards) in this codebase.
+- Admin “Export Excel/CSV” downloads CSV (UTF-8 BOM) that Excel opens natively.
 
 ---
 
 # 🚀 Future Improvements
 
+- Publish Power BI reports to Power BI Service and embed via `VITE_POWERBI_EMBED_URL`
 - Blockchain-based energy transactions
 - Mobile Application
 - Live IoT Smart Meter Integration
@@ -430,7 +508,6 @@ POWERFLOW
 - Multi-language Support
 
 ---
-
 
 # ⭐ Support
 
