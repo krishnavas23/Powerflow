@@ -286,3 +286,61 @@ exports.redeemCredits = asyncHandler(async (req, res) => {
     energyCredits: wallet.energyCredits,
   });
 });
+
+/**
+ * Export current user's transactions as Excel-compatible CSV
+ * GET /api/wallet/transactions/export
+ */
+exports.exportTransactionsCsv = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  const { Parser } = require('json2csv');
+
+  const transactions = await Transaction.find({
+    $or: [{ seller: userId }, { buyer: userId }],
+  })
+    .sort({ createdAt: -1 })
+    .populate('seller', 'name email')
+    .populate('buyer', 'name email')
+    .lean();
+
+  const rows = transactions.map((tx) => {
+    const isSeller = tx.seller && String(tx.seller._id) === String(userId);
+    return {
+      transaction_id: String(tx._id),
+      type: tx.type,
+      status: tx.status,
+      role: isSeller ? 'Seller' : 'Buyer',
+      counterparty: isSeller
+        ? tx.buyer?.email || tx.buyer?.name || '-'
+        : tx.seller?.email || tx.seller?.name || '-',
+      kwh: tx.kwh || 0,
+      amount_inr: tx.totalAmount || 0,
+      created_at: tx.createdAt ? new Date(tx.createdAt).toISOString() : '',
+      receipt_pdf:
+        tx.type === 'TRADE'
+          ? `/api/payments/receipt/transaction/${tx._id}.pdf`
+          : tx.type === 'RECHARGE' && tx.externalRefId
+            ? `/api/payments/receipt/session/${tx.externalRefId}.pdf`
+            : '',
+    };
+  });
+
+  const parser = new Parser({
+    fields: [
+      'transaction_id',
+      'type',
+      'status',
+      'role',
+      'counterparty',
+      'kwh',
+      'amount_inr',
+      'created_at',
+      'receipt_pdf',
+    ],
+  });
+  const csv = '\uFEFF' + parser.parse(rows.length ? rows : [{}]);
+
+  res.header('Content-Type', 'text/csv; charset=utf-8');
+  res.attachment(`my_transactions_${new Date().toISOString().slice(0, 10)}.csv`);
+  res.send(csv);
+});

@@ -31,11 +31,6 @@ const adminSystemConfigRoutes = require('./routes/admin/systemConfig');
 connectDB();
 const app = express();
 
-const { startMeterSimulation } = require('./services/meterSimulator');
-
-// Start background meter simulation
-startMeterSimulation();
-
 //stripe will be here.
 
 //general middleware
@@ -68,7 +63,6 @@ app.use('/api/dashboard', require('./routes/user/dashboard'));
 app.use('/api/profile', require('./routes/user/profile')); 
 app.use('/api/help', require('./routes/user/help'));
 app.use('/api/meters', meterRoutes);
-app.use('/api/test/meter', require('./routes/user/meter'));
 
 //admin api routes
 app.use("/api/admin/dashboard", adminDashboardRoutes);
@@ -76,6 +70,7 @@ app.use('/api/admin/verifications', adminVerificationsRoutes);
 app.use('/api/admin/users', adminUserRoutes);
 app.use('/api/admin/transactions', require('./routes/admin/transactions'));
 app.use('/api/admin/analytics', analyticsRoutes);
+app.use('/api/admin/powerbi', require('./routes/admin/powerbi'));
 app.use('/api/admin/config', platformConfigRoutes);
 app.use('/api/admin/system-config', adminSystemConfigRoutes);
 app.use('/api/admin/profile', require('./routes/admin/profile'));

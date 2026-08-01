@@ -31,4 +31,14 @@ db.sqlite3
 powerflow-backend/uploads/*
 !powerflow-backend/uploads/.gitkeep
 
+# Local Power BI practice assets (large images/videos/.pbix) — keep out of GitHub
+test/
+*.pbix
+*.mp4
+powerflow-backend/_tmp_*.js
+
+# Personal interview/helper notes — local only, never push
+*.txt
+!**/requirements.txt
+
 # Locks can be committed; keep package-lock for reproducibility

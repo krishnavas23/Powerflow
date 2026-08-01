@@ -98,9 +98,42 @@ export default function WalletInfo() {
       setLoading(false);
     }
   };
+
+  const handleExportExcelCsv = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const res = await fetch(`${BACKEND_BASE_URL}/api/wallet/transactions/export`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.message || "Export failed");
+      }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `my_transactions_${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (e: any) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Page>
-      <h1 className="text-3xl font-bold">Wallets</h1>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <h1 className="text-3xl font-bold">Wallets</h1>
+        <Button variant="secondary" disabled={loading} onClick={handleExportExcelCsv}>
+          Export Excel/CSV
+        </Button>
+      </div>
       {error && (
         <div className="mt-3 text-sm text-red-700 bg-red-100 border border-red-300 p-3 rounded-lg">
           {error}

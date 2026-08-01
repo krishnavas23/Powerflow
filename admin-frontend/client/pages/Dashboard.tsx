@@ -79,6 +79,12 @@ export default function Dashboard() {
     totalRevenue: 0,
     todayVolume: 0,
   });
+  const [changes, setChanges] = useState({
+    totalUsers: 0,
+    activeEnergy: 0,
+    totalRevenue: 0,
+    todayVolume: 0,
+  });
   const [trend, setTrend] = useState<{ name: string; value: number }[]>(fallbackRevenueChart);
   const [energyBars, setEnergyBars] = useState<{ name: string; value: number }[]>([
     { name: 'Active', value: 0 },
@@ -105,12 +111,45 @@ export default function Dashboard() {
           const activeEnergy = Number(data.activeEnergy ?? data.energy ?? 0);
           const totalRevenue = Number(data.totalRevenue ?? data.revenue ?? 0);
           const todayVolume = Number(data.todayVolume ?? data.txnCount ?? 0);
-          const revenueTrend = Array.isArray(data.revenueTrend)
-            ? data.revenueTrend.map((p: any) => ({ name: p._id || p.day || p.date || '', value: Number(p.total || p.value || 0) }))
-            : fallbackRevenueChart;
+          const rawTrend = Array.isArray(data.revenueTrend) ? data.revenueTrend : [];
+          // Pad last 7 calendar days so chart never looks blank when recent days have 0 revenue
+          const byDay: Record<string, number> = {};
+          rawTrend.forEach((p: any) => {
+            const key = p._id || p.day || p.date || '';
+            if (key) byDay[key] = Number(p.total || p.value || 0);
+          });
+          const padded: { name: string; value: number }[] = [];
+          for (let i = 6; i >= 0; i--) {
+            const d = new Date();
+            d.setHours(0, 0, 0, 0);
+            d.setDate(d.getDate() - i);
+            const key = d.toISOString().slice(0, 10);
+            padded.push({
+              name: d.toLocaleDateString(undefined, { weekday: 'short' }),
+              value: byDay[key] || 0,
+            });
+          }
+          // If all zeros but historical points exist outside window, show those instead
+          const hasRecent = padded.some((p) => p.value > 0);
+          const revenueTrend = hasRecent
+            ? padded
+            : rawTrend.length
+              ? rawTrend.map((p: any) => ({
+                  name: p._id || p.day || p.date || '',
+                  value: Number(p.total || p.value || 0),
+                }))
+              : fallbackRevenueChart;
 
           setTotals({ totalUsers, activeEnergy, totalRevenue, todayVolume });
           setTrend(revenueTrend);
+          if (data.changes) {
+            setChanges({
+              totalUsers: Number(data.changes.totalUsers || 0),
+              activeEnergy: Number(data.changes.activeEnergy || 0),
+              totalRevenue: Number(data.changes.totalRevenue || 0),
+              todayVolume: Number(data.changes.todayVolume || 0),
+            });
+          }
           if (data.energyDemand) {
             setEnergyBars([
               { name: 'Active', value: Number(data.energyDemand.active || 0) },
@@ -173,8 +212,8 @@ export default function Dashboard() {
           }
           label="Total Users"
           value={totals.totalUsers.toLocaleString()}
-          change="+2.5%"
-          isPositive={true}
+          change={`${changes.totalUsers >= 0 ? "+" : ""}${changes.totalUsers}%`}
+          isPositive={changes.totalUsers >= 0}
         />
         <StatCard
           icon={
@@ -185,8 +224,8 @@ export default function Dashboard() {
           label="Active Energy"
           value={`${totals.activeEnergy.toLocaleString()} kWh`
           }
-          change="+5.2%"
-          isPositive={true}
+          change={`${changes.activeEnergy >= 0 ? "+" : ""}${changes.activeEnergy}%`}
+          isPositive={changes.activeEnergy >= 0}
         />
         <StatCard
           icon={
@@ -196,8 +235,8 @@ export default function Dashboard() {
           }
           label="Total Revenue"
           value={`₹${totals.totalRevenue.toLocaleString()}`}
-          change="+8.1%"
-          isPositive={true}
+          change={`${changes.totalRevenue >= 0 ? "+" : ""}${changes.totalRevenue}%`}
+          isPositive={changes.totalRevenue >= 0}
         />
         <StatCard
           icon={
@@ -207,8 +246,8 @@ export default function Dashboard() {
           }
           label="Today's Volume"
           value={`${totals.todayVolume.toLocaleString()} txns`}
-          change="-1.2%"
-          isPositive={false}
+          change={`${changes.todayVolume >= 0 ? "+" : ""}${changes.todayVolume}%`}
+          isPositive={changes.todayVolume >= 0}
         />
       </div>
 
@@ -218,7 +257,7 @@ export default function Dashboard() {
         <div className="bg-card border border-border rounded-lg p-6">
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-foreground mb-1">
-              Revenue & Last Growth
+              Revenue Growth
             </h3>
             <p className="text-muted-foreground text-sm">7-day revenue trend</p>
           </div>
@@ -265,7 +304,7 @@ export default function Dashboard() {
         <div className="bg-card border border-border rounded-lg p-6">
           <div className="mb-6">
             <h3 className="text-lg font-semibold text-foreground mb-1">
-              Energy Demand in Demand
+              Energy Demand
             </h3>
             <p className="text-muted-foreground text-sm">
               Active vs Reserved energy

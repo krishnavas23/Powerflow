@@ -73,29 +73,60 @@ export default function Verification() {
           cache: 'no-store',
         });
         const data = await res.json();
-        if (!res.ok) throw new Error(data?.message || 'Failed to load verifications');
+        if (!res.ok) throw new Error(data?.message || data?.error || 'Failed to load verifications');
 
-        const src = Array.isArray(data) ? data : Array.isArray(data?.items) ? data.items : Array.isArray(data?.requests) ? data.requests : [];
-        const mapped: RequestItem[] = src.map((it: any) => ({
-          id: it._id,
-          name: it.userId?.name || it.name || 'User',
-          email: it.userId?.email || it.email || 'unknown@email',
-          status: it.overallStatus || it.status || 'Pending',
-          submittedDate: new Date(it.createdAt || Date.now()).toISOString().slice(0, 10),
-          documents: Array.isArray(it.documents) ? it.documents.map((d: any) => d.docType || d.type || 'Document') : [],
-          docStatus: Array.isArray(it.documents) ? it.documents.map((d: any) => (d.status || 'Pending').toLowerCase()) : [],
-        }));
+        const src = Array.isArray(data)
+          ? data
+          : Array.isArray(data?.items)
+            ? data.items
+            : Array.isArray(data?.requests)
+              ? data.requests
+              : Array.isArray(data?.data?.items)
+                ? data.data.items
+                : [];
+
+        const mapped: RequestItem[] = src.map((it: any, idx: number) => {
+          const statusRaw = it.overallStatus || it.status || 'Pending';
+          const status = String(statusRaw)
+            .replace(/^pending$/i, 'Pending')
+            .replace(/^under review$/i, 'Under Review')
+            .replace(/^approved$/i, 'Approved')
+            .replace(/^rejected$/i, 'Rejected');
+          const docs = Array.isArray(it.documents) ? it.documents : [];
+          return {
+            id: String(it._id || it.id || `${idx}`),
+            name: it.userId?.name || it.name || 'User',
+            email: it.userId?.email || it.email || 'unknown@email',
+            status,
+            submittedDate: new Date(it.createdAt || Date.now()).toISOString().slice(0, 10),
+            documents: docs.length
+              ? docs.map((d: any) => d.docType || d.type || d.filename || 'Document')
+              : ['No document metadata'],
+            docStatus: docs.length
+              ? docs.map((d: any) => String(d.status || 'Pending').toLowerCase())
+              : ['pending'],
+          };
+        });
         setItems(mapped);
-        // Derive counts directly from the rendered list so cards and list stay in sync
-        const derived = {
-          pending: mapped.filter((r) => r.status === 'Pending').length,
-          underReview: mapped.filter((r) => r.status === 'Under Review').length,
-          approvedToday: mapped.filter((r) => r.status === 'Approved').length,
-          rejectedToday: mapped.filter((r) => r.status === 'Rejected').length,
-        };
-        setCounts(derived);
+
+        if (data?.counts) {
+          setCounts({
+            pending: Number(data.counts.pending || 0),
+            underReview: Number(data.counts.underReview || 0),
+            approvedToday: Number(data.counts.approvedToday || 0),
+            rejectedToday: Number(data.counts.rejectedToday || 0),
+          });
+        } else {
+          setCounts({
+            pending: mapped.filter((r) => r.status === 'Pending').length,
+            underReview: mapped.filter((r) => r.status === 'Under Review').length,
+            approvedToday: mapped.filter((r) => r.status === 'Approved').length,
+            rejectedToday: mapped.filter((r) => r.status === 'Rejected').length,
+          });
+        }
       } catch (e: any) {
         setError(e?.message || 'Failed to load verifications');
+        setItems([]);
       }
   };
   useEffect(() => { load(); }, []);
@@ -182,6 +213,11 @@ export default function Verification() {
       {/* Verification Requests List */}
       <div className="bg-card border border-border rounded-lg overflow-hidden">
         <div className="divide-y divide-border">
+          {items.length === 0 && !error && (
+            <div className="p-8 text-center text-sm text-muted-foreground">
+              No verification requests found. When users upload KYC documents, they will appear here.
+            </div>
+          )}
           {items.map((request) => (
             <div
               key={request.id}

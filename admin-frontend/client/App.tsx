@@ -14,6 +14,7 @@ import UserManagement from "./pages/UserManagement";
 import Transactions from "./pages/Transactions";
 import Verification from "./pages/Verification";
 import Reports from "./pages/Reports";
+import PowerBI from "./pages/PowerBI";
 import PlatformConfig from "./pages/PlatformConfig";
 import Profile from "./pages/Profile";
 import SystemSettings from "./pages/SystemSettings";
@@ -46,6 +47,7 @@ const App = () => (
                 
                 <Route path="verification" element={<Verification />} />
                 <Route path="reports" element={<Reports />} />
+                <Route path="powerbi" element={<PowerBI />} />
                 <Route path="profile" element={<Profile />} />
                 <Route path="config" element={<PlatformConfig />} />
                 <Route path="settings" element={<SystemSettings />} />
@@ -68,6 +70,7 @@ const App = () => (
               element={<Navigate to="/admin/verification" />}
             />
             <Route path="/reports" element={<Navigate to="/admin/reports" />} />
+            <Route path="/powerbi" element={<Navigate to="/admin/powerbi" />} />
             <Route path="/config" element={<Navigate to="/admin/config" />} />
             <Route path="/settings" element={<Navigate to="/admin/settings" />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

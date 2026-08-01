@@ -35,10 +35,17 @@ const sidebarMenuItems = [
   },
   {
     id: "reports",
-    label: "Reports & Analytics",
+    label: "EDA & KPI Reporting",
     path: "/admin/reports",
     icon: "reports",
     color: "bg-indigo-500",
+  },
+  {
+    id: "powerbi",
+    label: "Power BI",
+    path: "/admin/powerbi",
+    icon: "powerbi",
+    color: "bg-yellow-500",
   },
   {
     id: "config",
@@ -86,6 +93,11 @@ const IconComponent = ({ icon, color }: { icon: string; color: string }) => {
     reports: (
       <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
         <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2V17zm4 0h-2V7h2V17zm4 0h-2v-4h2V17z" />
+      </svg>
+    ),
+    powerbi: (
+      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M3 3h8v18H3V3zm10 6h8v12h-8V9z" />
       </svg>
     ),
     config: (
