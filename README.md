@@ -531,7 +531,7 @@ It helps others discover the project!
 
 <div align="center">
 
-### ⚡ POWERFLOW
+### ⚡ POWERFLOW.
 ### *Empowering Renewable Energy Trading Through Technology.*
 
 </div>
