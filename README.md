@@ -1,7 +1,7 @@
 <div align="center">
 
 # ⚡ POWERFLOW
-### *UPI for Power – A Peer-to-Peer Renewable Energy Trading Platform*
+### *UPI for Power – A Peer-to-Peer Renewable Energy Trading Platform*.
 
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![React](https://img.shields.io/badge/Frontend-React-61DAFB)
